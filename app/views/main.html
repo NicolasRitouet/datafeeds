@@ -1,9 +1,22 @@
 <div class="hero-unit">
-  <h1>Cheerio!</h1>
-  <p>You now have</p>
+  <h1>Datafeeds<h1>
+  <p>You now have {{datafeeds.length}} datafeeds:</p>
   <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
+      <li ng-repeat="datafeed in datafeeds">{{datafeed.title}}</li>
   </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
 </div>
+<div>
+	<h1>Add a datafeed</h1>
+	<form class="form-horizontal" name="datafeedForm">
+		<input type="text" id="datafeedTitle" class="input-medium"
+			ng-model="datafeedTitle" required>
+		<input type="text" id="datafeedUrl" class="input-medium"
+			ng-model="datafeedUrl" required>
+		
+		<button class="btn btn-primary" ng-disabled="datafeedForm.$invalid"
+			ng-click="addDatafeed(datafeedTitle, datafeedUrl)">Add a datafeed</button>
+
+
+
+
+	</form>
