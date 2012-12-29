@@ -1,0 +1,15 @@
+tmux source-file ~/.tmux.conf
+tmux has-session -t datafeeds
+if [ $? != 0 ]; then
+	tmux new-session -s datafeeds -n editor -d
+	tmux send-keys -t datafeeds 'cd ~/datafeeds' C-m
+	tmux split-window -h -t datafeeds
+	tmux send-keys -t datafeeds:1.1 'export PATH=$PATH:/var/lib/gems/1.8/bin&& cd ~/datafeeds && yeoman server' C-m
+	tmux split-window -v -t datafeeds:1.1
+	tmux send-keys -t datafeeds:1 'cd ~/datafeeds && git status' C-m
+	tmux select-window -t datafeeds:1
+	tmux split-window -v -t datafeeds:1.2
+	tmux send-keys -t datafeeds:1.3 'htop' C-m
+	tmux select-pane -t datafeeds:1.0
+fi
+tmux attach -t datafeeds
